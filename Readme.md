@@ -4,7 +4,7 @@
 ## terraform-state
 
 * Directory to set up my terraform state storage in Azure through an Azure Storage Account
-* Apply once, and done
+* Apply once, and done, tf state is now managed in the cloud and secure
 
 ## terraform-resources
 
