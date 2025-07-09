@@ -12,13 +12,13 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "management" {
-  name     = "JC-E1-RG"
+  name     = "MGT-E1-RG"
   location = "East US"
 }
 
 
 resource "azurerm_storage_account" "tf_state" {
-  name                            = "jce1tfstate"
+  name                            = "mgte1tfstate"
   resource_group_name             = azurerm_resource_group.management.name
   location                        = azurerm_resource_group.management.location
   account_tier                    = "Standard"
