@@ -48,3 +48,13 @@ resource "azurerm_dns_a_record" "apex" {
   # records             = []    # Required, but empty when using alias
   target_resource_id = azurerm_static_web_app.nyc_outings.id
 }
+
+resource "azurerm_dns_txt_record" "root_validation" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.nyc_outings.name
+  resource_group_name = azurerm_resource_group.nyc_outings.name
+  ttl                 = 300
+  record {
+    value = azurerm_static_web_app_custom_domain.root.validation_token
+  }
+}
