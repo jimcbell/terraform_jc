@@ -6,11 +6,11 @@ terraform {
     }
   }
   backend "azurerm" {
-      resource_group_name  = "MGT-E1-RG"
+    resource_group_name = "MGT-E1-RG"
 
-      storage_account_name = "mgte1tfstate"
-      container_name       = "tfstate"
-      key                  = "terraform.tfstate"
+    storage_account_name = "mgte1tfstate"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
   }
 
 }
@@ -21,5 +21,5 @@ provider "azurerm" {
 
 
 module "nyc_outtings" {
-    source = "./nyc-outtings"
+  source = "./nyc-outings"
 }
