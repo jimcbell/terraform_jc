@@ -12,6 +12,17 @@ resource "azurerm_static_web_app" "nyc_outings" {
 
   tags = local.tags
 }
+resource "azurerm_static_web_app_custom_domain" "root" {
+  static_web_app_id = azurerm_static_web_app.nyc_outings.id
+  domain_name       = "nycoutings.com"
+  validation_type   = "dns-txt-token"
+}
+
+resource "azurerm_static_web_app_custom_domain" "www" {
+  static_web_app_id = azurerm_static_web_app.nyc_outings.id
+  domain_name       = "www.nycoutings.com"
+  validation_type   = "dns-txt-token"
+}
 
 resource "azurerm_dns_zone" "nyc_outings" {
   name = "nycoutings.com"
