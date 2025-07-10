@@ -14,8 +14,37 @@ resource "azurerm_static_web_app" "nyc_outings" {
 }
 
 resource "azurerm_dns_zone" "nyc_outings" {
-  name                = "nycoutings.com"
+  name = "nycoutings.com"
+
   resource_group_name = azurerm_resource_group.nyc_outings.name
 
   tags = local.tags
+}
+
+resource "azurerm_dns_cname_record" "www" {
+  name                = "www"
+  zone_name           = azurerm_dns_zone.nyc_outings.name
+  resource_group_name = azurerm_resource_group.nyc_outings.name
+  ttl                 = 300
+  record              = azurerm_static_web_app.nyc_outings.default_host_name
+}
+
+# # For apex, Azure DNS does not support CNAME at apex. You may need to use TXT for validation only.
+# resource "azurerm_dns_txt_record" "asw_validation" {
+#   name                = "@"
+#   zone_name           = azurerm_dns_zone.nyc_outings.name
+#   resource_group_name = azurerm_resource_group.nyc_outings.name
+#   ttl                 = 300
+#   record {
+#     value = "asw-validation=..." # You get this value from the Azure portal or after adding the custom domain in the Static Web App
+#   }
+# }
+
+resource "azurerm_dns_a_record" "apex" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.nyc_outings.name
+  resource_group_name = azurerm_resource_group.nyc_outings.name
+  ttl                 = 86400 # 24 hours
+  # records             = []    # Required, but empty when using alias
+  target_resource_id = azurerm_static_web_app.nyc_outings.id
 }

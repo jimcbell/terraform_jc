@@ -12,3 +12,13 @@
 
 ### Project Structure
 * Resources are grouped into modules that are specific to a singular application
+
+
+## Guides
+
+### Create Static Web App and Configure DNS
+
+1. Create the static web app through Terraform
+2. Create Azure DNS Zone through Terraform
+3. Create Apex & CNAME (www) record sets on the dns zone pointing to the static web app created
+4. Replace your DNR nameservers with the Azure DNS Zone nameservers (this shifts name service to Azure)
