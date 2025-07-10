@@ -22,3 +22,4 @@
 2. Create Azure DNS Zone through Terraform
 3. Create Apex & CNAME (www) record sets on the dns zone pointing to the static web app created
 4. Replace your DNR nameservers with the Azure DNS Zone nameservers (this shifts name service to Azure)
+5. Add custom domains to the Azure Static Web app for the www (subdomain) and @ (root / apex domain).
