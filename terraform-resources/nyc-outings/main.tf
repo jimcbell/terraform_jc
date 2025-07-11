@@ -58,3 +58,13 @@ resource "azurerm_dns_txt_record" "root_validation" {
     value = azurerm_static_web_app_custom_domain.root.validation_token
   }
 }
+resource "azurerm_dns_txt_record" "www_validation" {
+  name                = "www"
+  zone_name           = azurerm_dns_zone.nyc_outings.name
+  resource_group_name = azurerm_resource_group.nyc_outings.name
+  ttl                 = 300
+  record {
+    value = azurerm_static_web_app_custom_domain.www.validation_token
+  }
+}
+
